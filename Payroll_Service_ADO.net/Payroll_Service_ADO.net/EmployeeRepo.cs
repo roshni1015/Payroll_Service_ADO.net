@@ -86,7 +86,6 @@ namespace Payroll_Service_ADO.net
                     SqlCommand command = new SqlCommand("SpAddEmployeePayroll", this.connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Name", Payroll.Name);
-
                     command.Parameters.AddWithValue("@StartDate", Payroll.StartDate);
                     command.Parameters.AddWithValue("@Gender", Payroll.Gender);
                     command.Parameters.AddWithValue("@PhoneNumber", Payroll.PhoneNumber);
@@ -118,6 +117,25 @@ namespace Payroll_Service_ADO.net
             }
 
         }
+        public double UpdateBasicPay()
+        {
+            EmployeePayroll employee = new EmployeePayroll();
+            connection.Open();
+            SqlCommand command = new SqlCommand("Update EmployeeDetails set BasicPay=3000000 where Name='Terissa'", connection);
+            double result = command.ExecuteNonQuery();
+            if (result == 1)
+            {
+                string query = @"Select BasicPay from EmployeeDetails where Name='Terissa';";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                object res = cmd.ExecuteScalar();
+                connection.Close();
+                employee.BasicPay = (double)res;
+             
+            }
+            connection.Close();
+            return (employee.BasicPay);
+        }
     }
-
 }
+
+
