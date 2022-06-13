@@ -34,7 +34,7 @@ namespace Payroll_Service_ADO.net
                         {
                             employee.EmployeeID = dr.GetInt32(0);
                             employee.Name = dr.GetString(1);
-                            employee.StartDate = dr.GetString(2);
+                            employee.StartDate = dr.GetDateTime(2);
                             employee.Gender = dr.GetChar(3);
                             employee.PhoneNumber = dr.GetString(4);
                             employee.Address = dr.GetString(5);
@@ -134,6 +134,63 @@ namespace Payroll_Service_ADO.net
             }
             connection.Close();
             return (employee.BasicPay);
+        }
+      
+        public void GetEmployeesByDateRange()
+        {
+            EmployeePayroll employee = new EmployeePayroll();
+
+            try
+            {
+                using (this.connection)
+                {
+                    string query = @"select * from EmployeeDetails where StartDate between cast('2022-03-01' as date) and CAST('2022-03-25' as date) ;";
+
+                    SqlCommand cmd = new SqlCommand(query, this.connection);
+
+                    this.connection.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        employee.EmployeeID = dr.GetInt32(0);
+                        employee.Name = dr.GetString(1);
+                        employee.StartDate = dr.GetDateTime(2);
+                        employee.Gender = dr.GetChar(3);
+                        employee.PhoneNumber = dr.GetString(4);
+                        employee.Address = dr.GetString(5);
+                        employee.Department = dr.GetString(6);
+                        employee.BasicPay = dr.GetInt32(7);
+                        employee.Deductions = dr.GetDouble(8);
+                        employee.TaxablePay = dr.GetDouble(9);
+                        employee.IncomeTax = dr.GetDouble(10);
+                        employee.NetPay = dr.GetDouble(11);
+
+
+                        Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
+                        employee.EmployeeID,
+                        employee.Name,
+                        employee.StartDate,
+                        employee.Gender,
+                        employee.PhoneNumber,
+                        employee.Address,
+                        employee.Department,
+                        employee.BasicPay,
+                        employee.Deductions,
+                        employee.TaxablePay,
+                        employee.IncomeTax,
+                        employee.NetPay);
+                        Console.WriteLine("\n");
+
+                    };
+                    dr.Close();
+                    this.connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

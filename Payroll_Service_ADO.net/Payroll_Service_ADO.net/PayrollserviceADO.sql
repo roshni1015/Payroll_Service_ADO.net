@@ -18,8 +18,3 @@ begin
 Insert into EmployeeDetails Values ( @Name, @StartDate ,@Gender, @PhoneNumber, @Address, @Department, @BasicPay,@Deductions, @TaxablePay, @IncomeTax,@NetPay)
 End
 Select * from EmployeeDetails;
-
-
-
-
-

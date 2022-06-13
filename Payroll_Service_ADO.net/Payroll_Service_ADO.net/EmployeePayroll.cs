@@ -10,7 +10,7 @@ namespace Payroll_Service_ADO.net
     {
         public int EmployeeID { get; set; }
         public string Name { get; set; }
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         public char Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }

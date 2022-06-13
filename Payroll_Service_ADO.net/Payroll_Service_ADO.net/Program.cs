@@ -17,7 +17,7 @@ payroll.TaxablePay = 1000;
 payroll.IncomeTax = 1000;
 payroll.NetPay = 500;
 
-repo.AddEmployee(payroll);*/
+repo.AddEmployee(payroll);
 
 Console.WriteLine("Enter Name of the Employee : ");
 string Name = Console.ReadLine();
@@ -25,4 +25,6 @@ repo.UpdateBasicPay();
 double salary = repo.UpdateBasicPay();
 Console.Write("Updated Salary of Employee : ");
 Console.WriteLine(salary);
-repo.GetAllEmployeePayroll();
+repo.GetAllEmployeePayroll();*/
+
+repo.GetEmployeesByDateRange();
