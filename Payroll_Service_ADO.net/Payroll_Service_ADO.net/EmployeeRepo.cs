@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,8 @@ namespace Payroll_Service_ADO.net
                         {
                             employee.EmployeeID = dr.GetInt32(0);
                             employee.Name = dr.GetString(1);
-                            employee.StartDate = dr.GetDateTime(2);
-                            employee.Gender = dr.GetString(3);
+                            employee.StartDate = dr.GetString(2);
+                            employee.Gender = dr.GetChar(3);
                             employee.PhoneNumber = dr.GetString(4);
                             employee.Address = dr.GetString(5);
                             employee.Department = dr.GetString(6);
@@ -66,7 +67,7 @@ namespace Payroll_Service_ADO.net
 
                         Console.WriteLine("Data not Found");
 
-                    }                    
+                    }
                     dr.Close();
                     this.connection.Close();
                 }
@@ -76,5 +77,47 @@ namespace Payroll_Service_ADO.net
                 Console.WriteLine(ex.Message);
             }
         }
+        public bool AddEmployee(EmployeePayroll Payroll)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("SpAddEmployeePayroll", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Name", Payroll.Name);
+
+                    command.Parameters.AddWithValue("@StartDate", Payroll.StartDate);
+                    command.Parameters.AddWithValue("@Gender", Payroll.Gender);
+                    command.Parameters.AddWithValue("@PhoneNumber", Payroll.PhoneNumber);
+                    command.Parameters.AddWithValue("@Address", Payroll.Address);
+                    command.Parameters.AddWithValue("@Department", Payroll.Department);
+                    command.Parameters.AddWithValue("@BasicPay", Payroll.BasicPay);
+                    command.Parameters.AddWithValue("@Deductions", Payroll.Deductions);
+                    command.Parameters.AddWithValue("@TaxablePay", Payroll.TaxablePay);
+                    command.Parameters.AddWithValue("@IncomeTax", Payroll.IncomeTax);
+                    command.Parameters.AddWithValue("@NetPay", Payroll.NetPay);
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    this.connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+
+        }
     }
+
 }
