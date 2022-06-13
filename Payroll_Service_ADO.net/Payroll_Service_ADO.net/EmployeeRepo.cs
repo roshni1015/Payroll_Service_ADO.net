@@ -39,7 +39,7 @@ namespace Payroll_Service_ADO.net
                             employee.PhoneNumber = dr.GetString(4);
                             employee.Address = dr.GetString(5);
                             employee.Department = dr.GetString(6);
-                            employee.BasicPay = dr.GetDouble(7);
+                            employee.BasicPay = dr.GetInt32(7);
                             employee.Deductions = dr.GetDouble(8);
                             employee.TaxablePay = dr.GetDouble(9);
                             employee.IncomeTax = dr.GetDouble(10);
