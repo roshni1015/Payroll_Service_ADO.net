@@ -1,4 +1,6 @@
-Create procedure[dbo].[SpAddEmployeePayroll] 
+use EmployeePayroll_ADO;
+go
+Alter procedure[dbo].[SpAddEmployeePayroll] 
 (
    @Name varchar(25),
    @StartDate Date,

@@ -39,7 +39,7 @@ namespace Payroll_Service_ADO.net
                             employee.PhoneNumber = dr.GetString(4);
                             employee.Address = dr.GetString(5);
                             employee.Department = dr.GetString(6);
-                            employee.BasicPay = dr.GetInt32(7);
+                            employee.BasicPay = dr.GetDouble(7);
                             employee.Deductions = dr.GetDouble(8);
                             employee.TaxablePay = dr.GetDouble(9);
                             employee.IncomeTax = dr.GetDouble(10);
@@ -129,7 +129,7 @@ namespace Payroll_Service_ADO.net
                 SqlCommand cmd = new SqlCommand(query, connection);
                 object res = cmd.ExecuteScalar();
                 connection.Close();
-                employee.BasicPay = (double)res;
+                employee.BasicPay = (int)res;
              
             }
             connection.Close();
@@ -160,7 +160,7 @@ namespace Payroll_Service_ADO.net
                         employee.PhoneNumber = dr.GetString(4);
                         employee.Address = dr.GetString(5);
                         employee.Department = dr.GetString(6);
-                        employee.BasicPay = dr.GetInt32(7);
+                        employee.BasicPay = dr.GetDouble(7);
                         employee.Deductions = dr.GetDouble(8);
                         employee.TaxablePay = dr.GetDouble(9);
                         employee.IncomeTax = dr.GetDouble(10);
@@ -191,6 +191,56 @@ namespace Payroll_Service_ADO.net
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        public double SumFunction()
+        {
+            connection.Open();
+            string query = @"Select Sum(NetPay) from EmployeeDetails where Gender='M';";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            double Sum = (double)res;
+            return Sum;
+        }
+        public double AverageFunction()
+        {
+            connection.Open();
+            string query = @"Select Avg(NetPay) from EmployeeDetails where Gender='M';";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            double NetPay = (double)res;
+            return NetPay;
+        }
+        public double MinimumFunction()
+        {
+            connection.Open();
+            string query = @"Select Min(NetPay) from EmployeeDetails where Gender='M';";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            double min = (double)res;
+            return min;
+        }
+        public double MaximumFunction()
+        {
+            connection.Open();
+            string query = @"Select Max(NetPay) from EmployeeDetails where Gender='M';";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            double max = (double)res;
+            return max;
+        }
+        public int CountFunction()
+        {
+            connection.Open();
+            string query = @"Select count(*) from EmployeeDetails where Gender='M';";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            object res = cmd.ExecuteScalar();
+            connection.Close();
+            int Count = (int)res;
+            return Count;
         }
     }
 }
