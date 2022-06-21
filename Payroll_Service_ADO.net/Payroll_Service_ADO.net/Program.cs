@@ -17,7 +17,7 @@ while (true)
             break;
         case 2:
             payroll.Name = "Terissa";
-           // payroll.StartDate = "2022-03-12";
+            payroll.StartDate = "2022-03-12";
             payroll.Gender = 'F';
             payroll.PhoneNumber = "8877665544";
             payroll.Address = "Mumbai";
@@ -31,7 +31,6 @@ while (true)
             break;
         case 3:
             Console.WriteLine("Enter Name of the Employee : ");
-            //string Name = Console.ReadLine);
             repo.UpdateBasicPay();
             double salary = repo.UpdateBasicPay();
             Console.Write("Updated Salary of Employee : ");
