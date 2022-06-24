@@ -17,7 +17,7 @@ while (true)
             break;
         case 2:
             payroll.Name = "Terissa";
-           // payroll.StartDate = "2022-03-12";
+            //payroll.StartDate = "2022-03-12";
             payroll.Gender = 'F';
             payroll.PhoneNumber = "8877665544";
             payroll.Address = "Mumbai";
@@ -69,6 +69,7 @@ while (true)
             DateTime StartdateTimeThread = DateTime.Now;
             operationWIthThreads.AddingWithThread(employeeDetails2);
             DateTime StopDataTimeThread = DateTime.Now;
+            Console.WriteLine("Duration with Thread: " + (StopDataTimeThread - StartdateTimeThread));
             break;
         default:
             Console.WriteLine("Please choose the correct option");
